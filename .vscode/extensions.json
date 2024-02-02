@@ -1,5 +1,9 @@
 {
     "recommendations": [
-        "redhat.ansible"
+        // ansible extension will also install python and yaml extensions
+        "redhat.ansible",
+        // vscode openshift connector will also install kubernetes and red hat authentication extension
+        "redhat.vscode-openshift-connector",
+        "github.vscode-pull-request-github"
     ]
 }
