@@ -4,7 +4,11 @@ dependency:
   options:
     requirements-file: requirements.yml
 platforms:
-  - name: instance
-    # you might want to add your own variables here based on what provisioning
-    # you are doing like:
-    # image: quay.io/centos/centos:stream8
+  - name: molecule-ubi8-init-1
+    image: registry.access.redhat.com/ubi8/ubi-init@sha256:75cb1eb60b9636f8daa584c231db552c1de94006778e7224643804a696f04fad
+    workingDir: '/tmp'
+provisioner:
+  inventory:
+    group_vars:
+      all:
+        backup_file_molecule_namespace: ${DEVWORKSPACE_NAMESPACE}

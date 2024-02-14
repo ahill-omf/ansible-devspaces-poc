@@ -2,7 +2,8 @@
 - name: Converge
   hosts: all
   gather_facts: false
+  connection: community.okd.oc
   tasks:
-    - name: Replace this task with one that validates your content
-      ansible.builtin.debug:
-        msg: "This is the effective test"
+    - name: "Include sos_report"
+      ansible.builtin.include_role:
+        name: "omf.devspaces_poc.sos_report"
