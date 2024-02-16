@@ -1,0 +1,7 @@
+---
+- name: Test connectivity
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Test RHEL connectivity
+      ansible.builtin.ping:
