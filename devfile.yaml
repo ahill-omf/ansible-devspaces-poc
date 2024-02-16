@@ -13,24 +13,3 @@ components:
       env:
         - name: 'ANSIBLE_COLLECTIONS_PATH'
           value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-demo/collections'
-commands:
-  - id: oc-install
-    exec:
-      commandLine: '/usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/install_oc.yml'
-      workingDir: ${PROJECT_SOURCE}
-      group:
-        kind: build
-        isDefault: true
-      component: tooling-container
-  - id: molecule-create
-    exec:
-      label: "1.Molecule: start a test pod for the automation"
-      commandLine: 'source $HOME/.bashrc && molecule create'
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
-      group:
-        kind: run
-        isDefault: true
-      component: tooling-container
-events:
-  postStart:
-    - "oc-install"
