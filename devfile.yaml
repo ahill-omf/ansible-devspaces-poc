@@ -13,17 +13,6 @@ components:
       env:
         - name: 'ANSIBLE_COLLECTIONS_PATH'
           value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-demo/collections'
-  - name: controller
-    container:
-      image: quay.io/devspaces/ansible-creator-ee@sha256:30955d462930224aea8bf05b6b0f2a134678e35e7ff9e6dada04f2705ca07cbc
-      memoryRequest: 256M
-      memoryLimit: 6Gi
-      cpuRequest: 250m
-      cpuLimit: 2000m
-      args: ['tail', '-f', '/dev/null']
-      env:
-        - name: 'ANSIBLE_COLLECTIONS_PATH'
-          value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-demo/collections'
 commands:
   - id: oc-install
     exec:
