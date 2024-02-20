@@ -1,3 +1,25 @@
 schemaVersion: 2.2.0
 metadata:
   name: ansible-devspaces-poc
+components:
+  - name: tooling-container
+    container:
+      image: quay.io/devspaces/ansible-creator-ee@sha256:3128cce4c1f2c1600db7750ad8b1b0cc655fb59c621d982c863c24696c4bd68c
+      memoryRequest: 256M
+      memoryLimit: 6Gi
+      cpuRequest: 250m
+      cpuLimit: 2000m
+      args: ['tail', '-f', '/dev/null']
+      env:
+        - name: 'ANSIBLE_COLLECTIONS_PATH'
+          value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-demo/collections'
+commands:
+  - id: molecule-create
+    exec:
+      label: "1.Molecule: start a test pod for the automation"
+      commandLine: 'source $HOME/.bashrc && molecule create'
+      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      group:
+        kind: run
+        isDefault: true
+      component: tooling-container
