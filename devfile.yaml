@@ -33,4 +33,4 @@ commands:
       component: tooling-container
 events:
   postStart:
-    - "oc-install"
+    - "update-product-json"
