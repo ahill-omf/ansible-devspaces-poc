@@ -1,15 +1,41 @@
---
+---
 - name: Update Product JSON
   hosts: localhost
   connection: local
   gather_facts: false
   no_log: false
+  vars:
+    api_block: '"github.vscode-pull-request-github": ["extensionsAny"],'
+    file_path: "/checode/checode-linux-libc/product.json"
   tasks:
-    - name: Store user ENVs
-      set_fact:
-        molecule_user_home_dir: "{{ lookup('ansible.builtin.env', 'HOME') }}"
-        molecule_user_path: "{{ lookup('ansible.builtin.env', 'PATH') }}"
     - name: Check configuration file exists
       ansible.builtin.stat:
-        path: "/checode/checode-linux-libc/product.json"
+        path: "{{ file_path }}"
       register: product_result
+    - name: Print product result exists
+      ansible.builtin.debug:
+        msg: "{{ product_result.stat.exists }}"
+    - name: "Check if github extension is listed in product.json"
+      ansible.builtin.lineinfile:
+        name: "{{ file_path }}"
+        regexp: '\t\t"github.vscode-pull-request-github":*'
+        state: absent
+      check_mode: true
+      register: config_present
+      changed_when: false
+    - name: Print config present
+      ansible.builtin.debug:
+        var: config_present
+    - name: Insert/Update extensionEnabledApiProposals with github extension
+      ansible.builtin.blockinfile:
+        path: "{{ file_path }}"
+        insertafter: '"extensionEnabledApiProposals": {'
+        block: "\t\t{{ api_block }}"
+      when: not config_present.found
+    # Match any line starting with '#'
+    - name: Remove blockinfile markers
+      ansible.builtin.lineinfile:
+        path: "{{ file_path }}"
+        state: absent
+        regexp: "^#.*"
+      when: not config_present.found
