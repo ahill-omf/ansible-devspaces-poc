@@ -1,0 +1,15 @@
+--
+- name: Update Product JSON
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: false
+  tasks:
+    - name: Store user ENVs
+      set_fact:
+        molecule_user_home_dir: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+        molecule_user_path: "{{ lookup('ansible.builtin.env', 'PATH') }}"
+    - name: Check configuration file exists
+      ansible.builtin.stat:
+        path: "/checode/checode-linux-libc/product.json"
+      register: product_result
