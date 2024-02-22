@@ -5,7 +5,8 @@
   gather_facts: false
   no_log: false
   vars:
-    api_block: '"github.vscode-pull-request-github": ["extensionsAny"],'
+    # extensionAny
+    api_block: '"github.vscode-pull-request-github": ["activeComment", "tokenInformation", "contribShareMenu", "fileComments", "codeActionRanges", "commentReactor", "contribCommentPeekContext", "contribCommentThreadAdditionalMenu",	"codiconDecoration", "diffCommand", "contribCommentEditorActionsMenu", "shareProvider", "quickDiffProvider", "tabInputTextMerge", "treeViewMarkdownMessage"],'
     file_path: "/checode/checode-linux-libc/product.json"
   tasks:
     - name: Check configuration file exists
