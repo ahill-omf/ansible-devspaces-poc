@@ -33,4 +33,4 @@ commands:
       component: tooling-container
 events:
   postStart:
-    # - "update-product-json"
+    - modify-github-ext
