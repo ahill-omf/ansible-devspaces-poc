@@ -1,0 +1,10 @@
+---
+- name: Update GitHub Pull Requests Package JSON
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: /projects/ansible-devspaces-poc/files/github_pr_package.json
+        dest: /checode/remote/extensions/github.vscode-pull-request-github-0.80.1-universal
+        mode: '0664'
