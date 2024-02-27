@@ -33,4 +33,4 @@ commands:
       component: tooling-container
 events:
   postStart:
-    - modify-github-ext
+    - "modify-github-ext"
