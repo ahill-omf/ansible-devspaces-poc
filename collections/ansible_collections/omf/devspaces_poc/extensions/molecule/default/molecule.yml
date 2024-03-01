@@ -18,4 +18,4 @@ driver:
     managed: false
     ansible_connection_options:
       ansible_connection: oc
-    login_cmd_template: oc exec -it {instance} -c molecule bash
+    login_cmd_template: /home/runner/bin/oc exec -it {instance} -c molecule bash
