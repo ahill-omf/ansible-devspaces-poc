@@ -13,13 +13,6 @@ components:
       env:
         - name: 'ANSIBLE_COLLECTIONS_PATH'
           value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-poc/collections'
-driver:
-  name: default
-  options:
-    managed: false
-    ansible_connection_options:
-      ansible_connection: oc
-    login_cmd_template: oc exec -it {instance} -c molecule bash
 commands:
   - id: modify-github-ext
     exec:

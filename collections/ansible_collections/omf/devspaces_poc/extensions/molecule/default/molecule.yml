@@ -12,3 +12,10 @@ provisioner:
     group_vars:
       all:
         backup_file_molecule_namespace: ${DEVWORKSPACE_NAMESPACE}
+driver:
+  name: default
+  options:
+    managed: false
+    ansible_connection_options:
+      ansible_connection: oc
+    login_cmd_template: oc exec -it {instance} -c molecule bash
