@@ -89,6 +89,16 @@ commands:
         isDefault: true
       component: tooling-container
 
+  - id: molecule-test
+    exec:
+      label: "7.Molecule: login to molecule containers"
+      commandLine: 'source $HOME/.bashrc && molecule login'
+      workingDir: ${PROJECT_SOURCE}/collections/ansible_collections/omf/devspaces_poc/extensions
+      group:
+        kind: debug
+        isDefault: true
+      component: tooling-container
+
   - id: ansible-navigator
     exec:
       label: "Ansible-Navigator: Start ansible-navigator"
