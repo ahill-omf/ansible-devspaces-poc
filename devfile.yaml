@@ -1,6 +1,8 @@
 schemaVersion: 2.2.0
 metadata:
   name: ansible-devspaces-poc
+variables:
+  targetCollection: 'git@evdcigl-ssh.corp.fin:enterprise-engineering/ansible/collections/diagnostics.git'
 components:
   - name: tooling-container
     container:
@@ -28,7 +30,13 @@ commands:
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
-        isDefault: true
+      component: tooling-container
+  - id: clone-collection
+    exec:
+      commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml --extra-vars {{ targetCollection }}"
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: build
       component: tooling-container
   - id: molecule-create
     exec:
@@ -114,3 +122,4 @@ events:
   postStart:
     - "oc-install"
     # - "modify-github-ext"
+    - "clone-collection"
