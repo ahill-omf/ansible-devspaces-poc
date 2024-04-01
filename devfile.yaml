@@ -122,4 +122,4 @@ events:
   postStart:
     - "oc-install"
     # - "modify-github-ext"
-    # - "clone-collection"
+    - "clone-collection"
