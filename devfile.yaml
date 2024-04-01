@@ -2,7 +2,8 @@ schemaVersion: 2.2.0
 metadata:
   name: ansible-devspaces-poc
 variables:
-  targetCollection: 'git@evdcigl-ssh.corp.fin:enterprise-engineering/ansible/collections/diagnostics.git'
+  repoUrl: 'git@evdcigl-ssh.corp.fin:enterprise-engineering/ansible/collections/diagnostics.git'
+  repoPath: "/projects/ansible-devspaces-poc/collections/ansible_collections/diagnostics"
 components:
   - name: tooling-container
     container:
@@ -15,6 +16,10 @@ components:
       env:
         - name: 'ANSIBLE_COLLECTIONS_PATH'
           value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-poc/collections'
+        - name: "COLLECTION_URL"
+          value: "{{repoUrl}}"
+        - name: "COLLECTION_PATH"
+          value: "{{repoPath}}"
 commands:
   - id: oc-install
     exec:
@@ -33,8 +38,8 @@ commands:
       component: tooling-container
   - id: clone-collection
     exec:
+      # TODO Document that --extra-vars doesn't seem to work.
       commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml
-      # commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml --extra-vars {{ targetCollection }}
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build

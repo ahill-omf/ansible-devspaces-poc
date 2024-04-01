@@ -9,7 +9,7 @@
       - kubernetes
   tasks:
     - name: Store user ENVs
-      set_fact:
+      ansible.builtin.set_fact:
         molecule_user_home_dir: "{{ lookup('ansible.builtin.env', 'HOME') }}"
         molecule_user_path: "{{ lookup('ansible.builtin.env', 'PATH') }}"
     - name: Create local bin directory
