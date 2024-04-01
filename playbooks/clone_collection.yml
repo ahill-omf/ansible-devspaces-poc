@@ -8,7 +8,8 @@
     # Lint catches lack of idempotence. For this scenario, having the latest seems important
     - name: Clone GitLab Collection Repo
       ansible.builtin.git:
-        repo: "{{ targetCollection }}"
+        # repo: "{{ targetCollection }}"
+        repo: git@evdcigl-ssh.corp.fin:enterprise-engineering/ansible/collections/diagnostics.git
         dest: /projects/ansible-devspaces-poc/collections
         version: HEAD
         clone: true

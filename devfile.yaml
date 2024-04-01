@@ -33,7 +33,8 @@ commands:
       component: tooling-container
   - id: clone-collection
     exec:
-      commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml --extra-vars {{ targetCollection }}
+      commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml
+      # commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml --extra-vars {{ targetCollection }}
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
