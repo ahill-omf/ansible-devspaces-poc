@@ -38,7 +38,6 @@ commands:
       component: tooling-container
   - id: clone-collection
     exec:
-      # TODO Document that --extra-vars doesn't seem to work.
       commandLine: /usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/clone_collection.yml
       workingDir: ${PROJECT_SOURCE}
       group:
