@@ -20,13 +20,6 @@ components:
           value: "{{repoUrl}}"
         - name: "COLLECTION_PATH"
           value: "{{repoPath}}"
-# parent:
-#   uri: https://raw.githubusercontent.com/ahill-omf/omf-parent/main/devfile.yaml
-#   commands:
-#     - id: molecule-create
-#       exec:
-#         label: '### OVERRIDE ### 1.Molecule: start a test pod for the automation'
-#         commandLine: 'df -h'
 commands:
   - id: find-yaml
     exec:
@@ -41,5 +34,5 @@ commands:
       workingDir: /projects
       component: tooling-container
 events:
-  preStart:
+  postStart:
     - "bootstrap"
