@@ -20,6 +20,13 @@ components:
           value: "{{repoUrl}}"
         - name: "COLLECTION_PATH"
           value: "{{repoPath}}"
+projects:
+  - name: diagnostic
+    git:
+      remotes:
+        origin: 'https://evdcigl.corp.fin/enterprise-engineering/ansible/collections/diagnostics.git'
+      checkoutFrom:
+        revision: main
 commands:
   - id: oc-install
     exec:
