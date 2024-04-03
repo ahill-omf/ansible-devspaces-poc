@@ -25,5 +25,5 @@ commands:
       workingDir: /projects
       component: tooling-container
 events:
-  postStart:
+  preStart:
     - "bootstrap"
