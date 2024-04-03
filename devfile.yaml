@@ -18,3 +18,12 @@ commands:
       commandLine: 'find . -name "\*.y*ml"'
       workingDir: /projects
       component: tooling-container
+  - id: bootstrap
+    exec:
+      label: '### CHILD ONLY ### Bootstrap'
+      commandLine: 'echo "hello world" > bootstrap.txt'
+      workingDir: /projects
+      component: tooling-container
+events:
+  postStart:
+    - "bootstrap"
