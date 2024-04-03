@@ -1,0 +1,14 @@
+---
+- name: Generate Code Workspace
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: false
+  tasks:
+    - name: Check for Code Workspace file
+      ansible.builtin.stat:
+        path: /projects/.code-workspace
+      register: stat_result
+    - name: Print stat result
+      debug:
+        var: stat_result
