@@ -21,10 +21,10 @@ components:
         - name: "COLLECTION_PATH"
           value: "{{repoPath}}"
 projects:
-  - name: diagnostic
+  - name: demo-child-devfile
     git:
       remotes:
-        origin: 'https://evdcigl.corp.fin/enterprise-engineering/ansible/collections/diagnostics.git'
+        origin: 'https://github.com/ahill-omf/demo-child-devfile.git'
 commands:
   - id: oc-install
     exec:
