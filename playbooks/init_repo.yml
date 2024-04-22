@@ -1,0 +1,81 @@
+---
+- name: Create New GitHub Project Repo
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: false
+  vars_prompt:
+    - name: repo_name
+      prompt: What is the repository name?
+      private: false
+  vars:
+    target_file: '../.code-workspace'
+  tasks:
+    # TODO: Check that .code-workspace file exists.
+    - name: Add new directory to workspace
+      ansible.builtin.set_fact:
+        code_workspace: "{{ lookup('file', target_file) | from_json }}"
+    - name: Print code workspace
+      ansible.builtin.debug:
+        var: code_workspace
+    - name: Print code workspace folders
+      ansible.builtin.debug:
+        var: code_workspace.folders
+    - name: Print code workspace folders element
+      ansible.builtin.debug:
+        var: code_workspace.folders[0]
+    - name: Print code workspace folders element property
+      ansible.builtin.debug:
+        var: code_workspace.folders[0].path
+    - name: Print code workspace folders type
+      ansible.builtin.debug:
+        var: code_workspace.folders[0] | type_debug
+    - name: Check for directory path in .code-workspace
+      ansible.builtin.set_fact:
+        in_workspace: true
+      with_items: code_workspace.folders
+      when: item.path | string == repo_name
+        # and item.path == '/projects/{{ repo_name }}'
+    # TODO: Check if project folder all ready exists.
+    - name: Create project directory
+      ansible.builtin.file:
+        path: "/projects/{{ repo_name }}"
+
+
+    # - name: Check configuration file exists
+    #   ansible.builtin.stat:
+    #     path: "{{ file_path }}"
+    #   register: product_result
+    # - name: Print product result exists
+    #   ansible.builtin.debug:
+    #     msg: "{{ product_result.stat.exists }}"
+    # - name: "Check if readonlyMessage is listed in enabledApiProposals"
+    #   ansible.builtin.lineinfile:
+    #     name: "{{ file_path }}"
+    #     regexp: '\t\t"readonlyMessage"*'
+    #     state: absent
+    #   check_mode: true
+    #   register: config_present
+    #   changed_when: false
+    # - name: Print config present
+    #   ansible.builtin.debug:
+    #     var: config_present
+    # - name: Insert/Update readonlyMessage with enabledApiProposals
+    #   ansible.builtin.blockinfile:
+    #     path: "{{ file_path }}"
+    #     insertafter: '\t"enabledApiProposals": \['
+    #     block: "\t\t{{ api_addition }}"
+    #   when: not config_present.found
+    # # Match any line starting with '#'
+    # - name: Remove blockinfile markers
+    #   ansible.builtin.lineinfile:
+    #     path: "{{ file_path }}"
+    #     state: absent
+    #     regexp: "^#.*"
+    # - name: Clone GitLab Collection Repo
+    #   ansible.builtin.git:
+    #     repo: "{{ repo_url }}"
+    #     dest: "{{ repo_path }}"
+    #     version: HEAD
+    #     clone: true
+    #     separate_git_dir: /projects
