@@ -41,12 +41,16 @@ for folder in workspace['folders']:
     if folder.get("name") == project_name:
         logging.debug("Matching name found.")
         element_exists = True
+        # sys.exit(os.EX_CONFIG)
+        sys.exit(1)
     if folder.get("path") == project_path:
         logging.debug("Matching path found.")
         element_exists = True
+        # sys.exit(os.EX_CONFIG)
+        sys.exit(1)
 
 if not element_exists:
-    logging.debug("Element not found in folders. Adding new dict")
+    logging.debug("Element not found in folders. Adding new dict to list")
     new_folder = {
         'name': project_name,
         'path': project_path
