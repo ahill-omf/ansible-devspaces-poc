@@ -7,7 +7,7 @@ import os
 import sys
 
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
-file_path = '/home/andrew/repos/ansible-devspaces-poc/.code-workspace'
+file_path = '/projects/.code-workspace'
 
 # Gather arguments
 parser = argparse.ArgumentParser("add_to_code_workspace")
