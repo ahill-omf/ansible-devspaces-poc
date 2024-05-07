@@ -38,6 +38,6 @@
         creates: "{{ project_path }}/molecule/default"
     - name: Overwrite scenario molecule.yml
       ansible.builtin.copy:
-        src: "files/molecule.yml"
-        dest: "{{ project_path }}/molecule/default/molecule.yml"
+        src: "files/molecule"
+        dest: "{{ project_path }}/molecule/default/"
         mode: '0644'
