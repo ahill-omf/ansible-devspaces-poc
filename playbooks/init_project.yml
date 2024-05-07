@@ -36,8 +36,8 @@
         chdir: "{{ project_path }}"
         cmd: "molecule init scenario"
         creates: "{{ project_path }}/molecule/default"
-    - name: Overwrite scenario molecule.yml
+    - name: Overwrite default molecule scenario
       ansible.builtin.copy:
-        src: "files/molecule"
+        src: "files/molecule/"
         dest: "{{ project_path }}/molecule/default/"
         mode: '0644'
