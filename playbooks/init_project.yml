@@ -41,3 +41,8 @@
         src: "files/molecule/"
         dest: "{{ project_path }}/molecule/default/"
         mode: '0644'
+    - name: Update the project environmental variable
+      ansible.builtin.lineinfile:
+        path: ~/.bashrc
+        regexp: '^export PROJECT_SOURCE='
+        line: export PROJECT_SOURCE='{{ project_path }}'
