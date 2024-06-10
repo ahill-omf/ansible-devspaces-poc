@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  no_log: "{{ molecule_no_log }}"
+  # no_log: "{{ molecule_no_log }}"
   tasks:
     - name: Create molecule instance as containers
       community.okd.k8s:
@@ -16,14 +16,13 @@
     - name: Debug molecule creations
       ansible.builtin.debug:
         var: server
-    - name: Store container information  # noqa: no-handler
-      when: server.changed | default(false) | bool
+    - name: Create instance config
+      when: server.changed | default(false) | bool  # noqa no-handler
       block:
-        - name: Populate instance config dict
+        - name: Populate instance config dict  # noqa jinja
           ansible.builtin.set_fact:
             instance_conf_dict: {
-              'instance': "{{ item.result.status.containerStatuses[0].name }}",
-            }
+              'instance': "{{ item.result.status.containerStatuses[0].name }}", }
           with_items: "{{ server.results }}"
           register: instance_config_dict
         - name: Convert instance config dict to a list
