@@ -18,7 +18,7 @@
         var: server
     - name: Store container information  # noqa: no-handler
       when: server.changed | default(false) | bool
-      block:  
+      block:
         - name: Populate instance config dict
           ansible.builtin.set_fact:
             instance_conf_dict: {

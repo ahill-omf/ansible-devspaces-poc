@@ -12,3 +12,13 @@ provisioner:
     group_vars:
       all:
         backup_file_molecule_namespace: ${DEVWORKSPACE_NAMESPACE}
+  env:
+    ANSIBLE_LOCAL_TEMP: "${WORKSPACE:-$HOME}/.ansible/tmp"
+    ANSIBLE_REMOTE_TMP: /tmp
+driver:
+  name: default
+  options:
+    managed: false
+    ansible_connection_options:
+      ansible_connection: oc
+    login_cmd_template: /home/runner/bin/oc exec -it {instance} -c molecule bash
