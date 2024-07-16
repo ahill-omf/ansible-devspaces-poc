@@ -1,0 +1,16 @@
+---
+- name: Configure workspace for tasks
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: false
+  tasks:
+    - name: Set facts from environmental variables
+      ansible.builtin.set_fact:
+        project_source: "{{ lookup('ansible.builtin.env', 'PROJECT_SOURCE') }}"
+
+    - name: Environment variables copy PROJECT_SOURCE to PRIMARY_SOURCE
+        ansible.builtin.lineinfile:
+        path: ~/.bashrc
+        regexp: '^export PRIMARY_SOURCE='
+        line: export PRIMARY_SOURCE='{{ project_source }}'

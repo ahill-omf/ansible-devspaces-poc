@@ -4,13 +4,36 @@
   connection: local
   gather_facts: false
   no_log: false
-  vars_prompt:
-    - name: target_project
-      prompt: What is the target project?
-      private: false
   tasks:
+    - name: Set facts from environmental variables
+      ansible.builtin.set_fact:
+        project_source: "{{ lookup('ansible.builtin.env', 'PROJECT_SOURCE') }}"
+        molecule_scenario: "{{ lookup('ansible.builtin.env', 'MOLECULE_SCENARIO') }}"
+
+    - name: Prompt for new PROJECT_SOURCE
+      ansible.builtin.pause:
+        prompt: "What is the target project path? Current path: '{{ project_source }}'"
+      register: target_project
+
+    - name: Prompt for new MOLECULE_SCENARIO
+      ansible.builtin.pause:
+        prompt: "What is the target molecule scenario? Current scenario: '{{ molecule_scenario }}'"
+      register: target_scenario
+
     - name: Update the project environmental variable
       ansible.builtin.lineinfile:
         path: ~/.bashrc
         regexp: '^export PROJECT_SOURCE='
-        line: export PROJECT_SOURCE='{{ target_project }}'
+        line: export PROJECT_SOURCE='{{ target_project.user_input }}'
+
+    - name: Update the scenario environmental variable
+      ansible.builtin.lineinfile:
+        path: ~/.bashrc
+        regexp: '^export MOLECULE_SCENARIO='
+        line: export MOLECULE_SCENARIO='{{ target_scenario.user_input }}'
+
+    - name: Print target_scenario
+      ansible.builtin.debug:
+        msg: 
+          - "PROJECT_SOURCE updated from {{ project_source }} to {{ target_project.user_input }}"
+          - "MOLECULE_SCENARIO updated from {{ molecule_scenario }} to {{ target_scenario.user_input }}"

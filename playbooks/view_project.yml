@@ -1,0 +1,13 @@
+---
+- name: View Project Environmental Variable
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: false
+  tasks:
+    - name: View PROJECT_SOURCE
+      ansible.builtin.debug:
+        msg: "PROJECT_SOURCE: {{ lookup('ansible.builtin.env', 'PROJECT_SOURCE') }}"
+    - name: View MOLECULE_SCENARIO
+      ansible.builtin.debug:
+        msg: "MOLECULE_SCENARIO: {{ lookup('ansible.builtin.env', 'MOLECULE_SCENARIO') }}"
