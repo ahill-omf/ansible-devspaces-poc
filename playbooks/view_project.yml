@@ -5,9 +5,14 @@
   gather_facts: false
   no_log: false
   tasks:
-    - name: View PROJECT_SOURCE
+    - name: Set facts from environmental variables
+      ansible.builtin.set_fact:
+        project_source: "{{ lookup('ansible.builtin.env', 'PROJECT_SOURCE') }}"
+        secondary_source: "{{ lookup('ansible.builtin.env', 'SECONDARY_SOURCE') }}"
+        molecule_scenario: "{{ lookup('ansible.builtin.env', 'MOLECULE_SCENARIO') }}"
+    - name: Print project environmental variables
       ansible.builtin.debug:
-        msg: "PROJECT_SOURCE: {{ lookup('ansible.builtin.env', 'PROJECT_SOURCE') }}"
-    - name: View MOLECULE_SCENARIO
-      ansible.builtin.debug:
-        msg: "MOLECULE_SCENARIO: {{ lookup('ansible.builtin.env', 'MOLECULE_SCENARIO') }}"
+        msg: 
+          - "PROJECT_SOURCE: {{ project_source }}"
+          - "SECONDARY_SOURCE: {{ secondary_source }}"
+          - "MOLECULE_SCENARIO: {{ molecule_scenario }}"

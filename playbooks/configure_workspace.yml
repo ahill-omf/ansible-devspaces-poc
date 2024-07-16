@@ -9,8 +9,8 @@
       ansible.builtin.set_fact:
         project_source: "{{ lookup('ansible.builtin.env', 'PROJECT_SOURCE') }}"
 
-    - name: Environment variables copy PROJECT_SOURCE to PRIMARY_SOURCE
+    - name: Environment variables copy PROJECT_SOURCE to SECONDARY_SOURCE
       ansible.builtin.lineinfile:
         path: ~/.bashrc
-        regexp: '^export PRIMARY_SOURCE='
-        line: export PRIMARY_SOURCE='{{ project_source }}'
+        regexp: '^export SECONDARY_SOURCE='
+        line: export SECONDARY_SOURCE='{{ project_source }}'
