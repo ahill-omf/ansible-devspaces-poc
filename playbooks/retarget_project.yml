@@ -34,6 +34,6 @@
 
     - name: Print change information
       ansible.builtin.debug:
-        msg: 
+        msg:
           - "SECONDARY_SOURCE updated from {{ secondary_source }} to {{ target_project.user_input }}"
           - "MOLECULE_SCENARIO updated from {{ molecule_scenario }} to {{ target_scenario.user_input }}"

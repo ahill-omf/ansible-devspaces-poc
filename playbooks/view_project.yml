@@ -12,7 +12,7 @@
         molecule_scenario: "{{ lookup('ansible.builtin.env', 'MOLECULE_SCENARIO') }}"
     - name: Print project environmental variables
       ansible.builtin.debug:
-        msg: 
+        msg:
           - "PROJECT_SOURCE: {{ project_source }}"
           - "SECONDARY_SOURCE: {{ secondary_source }}"
           - "MOLECULE_SCENARIO: {{ molecule_scenario }}"
