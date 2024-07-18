@@ -4,6 +4,10 @@ metadata:
 parent:
   uri: https://raw.githubusercontent.com/ahill-omf/omf-parent/main/devfile.yaml
 projects:
+  - name: ansible-devspaces-poc
+    git:
+      remotes:
+        origin: "https://github.com/ahill-omf/ansible-devspaces-poc.git"
   - name: demo-child-devfile
     git:
       remotes:
