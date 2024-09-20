@@ -4,6 +4,9 @@
   connection: local
   gather_facts: false
   no_log: false
+  vars:
+    install_substring: "was successfully installed."
+    ext_id: "ms-python.python@2024.12.3"
   tasks:
     - name: Set facts from environmental variables
       ansible.builtin.set_fact:
@@ -20,3 +23,8 @@
         path: ~/.bashrc
         regexp: '^export MOLECULE_SCENARIO='
         line: export MOLECULE_SCENARIO='default'
+
+    - name: Install last known working Python Extension version
+      ansible.builtin.command: "code-oss --install-extension '{{ ext_id }}'"
+      register: result
+      changed_when: install_substring in result.stdout
