@@ -14,9 +14,9 @@ components:
         - name: 'ANSIBLE_COLLECTIONS_PATH'
           value: '~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-demo/collections'
 commands:
-  - id: update-product-json
+  - id: modify-github-ext
     exec:
-      commandLine: '/usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/update_product_json.yml'
+      commandLine: '/usr/local/bin/ansible-playbook ${PROJECT_SOURCE}/playbooks/modify_github_pr_ext.yml'
       workingDir: ${PROJECT_SOURCE}
       group:
         kind: build
